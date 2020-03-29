@@ -25,7 +25,7 @@ SECRET_KEY = '#v@yv6kprn@n2!p9ar(1o_55d1hyq+7(x9y&@gts8%&q)q!0rp'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['dcr-boilerplate-django-react.herokuapp.com']
 
 
 # Application definition
