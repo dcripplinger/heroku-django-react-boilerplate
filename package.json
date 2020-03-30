@@ -1,5 +1,4 @@
 {
-	"name": "heroku-django-react-boilerplate",
 	"engines": {
 		"yarn": "1.22"
 	},
