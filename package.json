@@ -1,4 +1,8 @@
 {
+	"name": "heroku-django-react-boilerplate",
+	"engines": {
+		"yarn": "1.22"
+	},
 	"scripts": {
 		"postinstall": "cd frontend && yarn && yarn build"
 	}
