@@ -119,5 +119,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Heroku documentation says this should be the static root
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'frontend', 'build', 'static')
