@@ -52,16 +52,22 @@ then
     echo "Giving direnv permission to do its thing."
     direnv allow .
 fi
-
 if [ "$RELOAD_BASHRC" = true ]
 then
     echo -e "${YELLOW}~/.bashrc has been modified. Please exit and restart the terminal for it to take effect, then re-run \`./setup.sh\`."
     exit 0
 fi
 
+echo "Checking python version..."
 if [[ `pipenv check 2>&1 >/dev/null | grep 'Specifier python_full_version does not match'` ]]
 then
     echo -e "${YELLOW}Wrong version of python installed in pipenv virtual environment. Removing the environment. Please exit this directory and return to it to trigger the environment to be created again. Then re-run \`./setup.sh\`."
     pipenv --rm
     exit 0
 fi
+
+echo "Installing any missing dependencies..."
+pipenv install --dev
+
+echo "Applying any database migrations..."
+./manage.py migrate
