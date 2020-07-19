@@ -59,7 +59,7 @@ then
     exit 0
 fi
 
-if [[ `pipenv check 2>&1 >/dev/null | grep 'Specifier python_version does not match'` ]]
+if [[ `pipenv check 2>&1 >/dev/null | grep 'Specifier python_full_version does not match'` ]]
 then
     echo -e "${YELLOW}Wrong version of python installed in pipenv virtual environment. Removing the environment. Please exit this directory and return to it to trigger the environment to be created again. Then re-run \`./setup.sh\`."
     pipenv --rm
