@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+import dj_database_url
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,7 +27,7 @@ SECRET_KEY = '#v@yv6kprn@n2!p9ar(1o_55d1hyq+7(x9y&@gts8%&q)q!0rp'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['dcr-boilerplate-django-react.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '0.0.0.0', 'dcr-boilerplate-django-react.herokuapp.com']
 
 
 # Application definition
@@ -37,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'backend',
 ]
 
 MIDDLEWARE = [
@@ -49,8 +53,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
     {
@@ -71,15 +73,32 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 
+# django rest framework settings
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100
+}
+
+
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+DB_LOCAL_USER = "heroku-django-react-boilerplate"
+DB_LOCAL_PASSWORD = "password"
+DB_LOCAL_POSTGRES_PORT = "5432"
+
+DB_LOCAL_URL = "postgres://{}:{}@localhost:{}".format(
+    DB_LOCAL_USER,
+    DB_LOCAL_PASSWORD,
+    DB_LOCAL_POSTGRES_PORT,
+)
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    "default": dj_database_url.config(conn_max_age=600, ssl_require=True, default=DB_LOCAL_URL)
 }
+
+del DATABASES['default']['OPTIONS']['sslmode']
 
 
 # Password validation
@@ -123,3 +142,10 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend', 'build', 'static')]
+
+
+# url stuff
+
+APPEND_SLASH = False
+
+ROOT_URLCONF = 'backend.urls'

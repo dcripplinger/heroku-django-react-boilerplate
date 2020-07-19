@@ -19,7 +19,11 @@ I copy this code when starting a new application with this kind of setup, to sav
 
 This project is meant to be developed and locally run on Ubuntu 16.04 or later. It might also be fine on Windows with the Ubuntu subsystem or other Unix-like systems (e.g. MacOS, Fedora), but there are a few commands in setup scripts that use `apt` to install things on a Debian system (e.g. Ubuntu) that you'd probably have to skip and do manually with whatever installation package makes sense for your system. If you don't have Ubuntu installed natively and you don't want to try running this project on a different system, try installing an Ubuntu virtual machine and working in there.
 
-### Setting up localdev
+Your OS must already have the following installed independently before doing anything with this project:
+- Current version of postgres (I think it's already included in Ubuntu and macOS distributions). The project uses the default postgres port 5432 to connect to the local database, unless that setting is changed.
+- Some version of python and pip, for installing pipenv. The actual version of python needed for running this app will be installed by pyenv automatically, if necessary, and enforced by pipenv.
+
+### Setting up localdev backend
 
 After you have cloned the repo to your local machine, you will need to run `./setup.sh`. The very first time you run it, it will attempt to install a few system-level applications needed and set up the virtual environment. It may need to break early and have you restart the terminal or leave and return the project directory, after which you should re-run `./setup.sh`. The script itself should guide you through it.
 
